@@ -1,0 +1,104 @@
+* {
+  box-sizing: border-box; /* Utilise la boîte modèle qui inclut les marges et les rembourrages dans le calcul de la taille */
+  margin: 0; /* Supprime toutes les marges par défaut */
+  padding: 0; /* Supprime tous les rembourrages par défaut */
+}
+body {
+  font-family: 'Noto Sans JP', sans-serif; /* Choix de la police de caractères */
+  min-height: 100vh; /* Définit la hauteur minimale de la fenêtre d'affichage comme 100% de la hauteur de la vue */
+  display: flex; /* Utilise le modèle de boîte flexible pour le contenu de la page */
+  align-items: center; /* Centre verticalement le contenu */
+  justify-content: center; /* Centre horizontalement le contenu */
+  background: linear-gradient(0deg, #D9AFD9, #97D9E1);
+}
+.card {
+  margin: 0 auto; /* Centre la carte horizontalement en utilisant la marge automatique */
+  width: 240px; /* Largeur de la carte */
+  height: 320px; /* Hauteur de la carte */
+  perspective: 1000px; /* Perspective pour l'effet 3D */
+  text-align: center; /* Centre le texte horizontalement */
+}
+.card-inner {
+  position: relative; /* Position relative pour les éléments enfants positionnés par rapport à cela */
+  width: 100%; /* Largeur de 100% pour remplir la carte */
+  height: 100%; /* Hauteur de 100% pour remplir la carte */
+  transition: transform 0.6s; /* Animation de transformation de 0.6 secondes */
+  transform-style: preserve-3d; /* Préserve la perspective 3D */
+}
+.card:hover .card-inner {
+  transform: rotateY(180deg);
+}
+.card-front, .card-back {
+  position: absolute; /* Position absolue pour les faces avant et arrière de la carte */
+  height: 100%; /* Hauteur de 100% pour remplir la carte */
+  width: 100%; /* Largeur de 100% pour remplir la carte */
+  backface-visibility: hidden; /* Cache le côté arrière de la carte */
+  padding: 16px; /* Rembourrage de 16 pixels */
+  border-radius: 8px; /* Coins arrondis de 8 pixels */
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); /* Ombre de la carte */
+}
+.card-front {
+  background: url('images/front.jpg') center/cover; /* Arrière-plan de la face avant */
+  display: flex; /* Modèle de boîte flexible pour la mise en page */
+  flex-direction: column; /* Colonne pour aligner les éléments en colonne */
+  align-items: center;
+  justify-content: flex-end;
+  overflow: hidden;
+}
+.card-front:before {
+  content: ''; /* Contenu vide pour le pseudo-élément */
+  position: absolute; /* Position absolue */
+  width: 100%; /* Largeur de 100% */
+  height: 100%; /* Hauteur de 100% */
+  top: 0; /* Position en haut */
+  background: linear-gradient(0deg, black, transparent);
+}
+.card-front .card-content {
+  z-index: 1; /* Empile le contenu devant le pseudo-élément ::before */
+  color: white;
+}
+.card-back {
+  transform: rotateY(180deg); /* Fait pivoter la face arrière de 180 degrés */
+  background: white;
+  display: flex; /* Modèle de boîte flexible pour la mise en page */
+  flex-direction: column; /* Colonne pour aligner les éléments en colonne */
+  align-items: center; /* Centre verticalement les éléments */
+  justify-content: center; /* Centre le contenu au milieu de la carte */
+}
+.card-back .card-image {
+  width: 120px; /* Largeur de l'image */
+  height: 120px; /* Hauteur de l'image */
+  margin: 0 auto; /* Centre l'image horizontalement */
+  border: 1px solid #cecece;
+  border-radius: 50%;
+  background: url('images/back.jpg') center/cover; /* Arrière-plan de l'image */
+}
+.card-back p {
+  margin-top: 12px;
+}
+.card-back .card-icons {
+  display: flex; /* Modèle de boîte flexible pour la mise en page des icônes */
+  justify-content: center;
+  align-items: center;
+}
+.card-back .card-icons a {
+  font-size: 18px;
+  color: white;
+  background: black;
+  width: 42px; /* Largeur de l'icône */
+  height: 42px; /* Hauteur de l'icône */
+  border-radius: 50%;
+  margin: 8px; /* Marge de 8 pixels autour des icônes */
+  display: flex; /* Modèle de boîte flexible pour les icônes */
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  transition: opacity 0.2s; /* Animation de transition d'opacité de 0.2 secondes */
+}
+.card-back .card-icons a:hover {
+  cursor: pointer;
+  opacity: 0.7; /* Réduit l'opacité à 0.7 lors du survol */
+}
+.card:hover .card-front {
+  opacity: 0; /* Réduit l'opacité de la face avant à 0 lors du survol */
+}
